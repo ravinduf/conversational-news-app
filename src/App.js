@@ -24,6 +24,7 @@ function App() {
     <div>
       <h1>Alan AI News Applications</h1>
       <NewsCards articles={newsArticles}/>
+     
     </div>
   );
 }
