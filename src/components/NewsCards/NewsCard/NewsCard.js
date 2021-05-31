@@ -23,12 +23,12 @@ const NewsCard = ({
 
     const classes = useStyles();
   return (
-    <Card>
+    <Card className={classes.card}>
       {/* the clickable area */}
-      <CardActionArea> 
+      <CardActionArea href={url} target="_blank"> 
         <CardMedia className={classes.media}  image={urlToImage || `https://s.france24.com/media/display/d1676b6c-0770-11e9-8595-005056a964fe/w:1400/p:16x9/news_1920x1080.webp`} /> {/* the tag to add image to card */}
         
-        <div>
+        <div className={classes.details}>
           <Typography variant="body2" color="textSecondary" component="h2">
             {(new Date(publishedAt)).toDateString()}
           </Typography>
@@ -36,7 +36,7 @@ const NewsCard = ({
             {source.name}
           </Typography>
         </div>
-        <Typography gutterBottom variant="h5">
+        <Typography className={classes.title} gutterBottom variant="h5">
           {/* gutteerbottom means there will be a some padding/margin at bottom*/}
           {title}
         </Typography>
@@ -47,7 +47,7 @@ const NewsCard = ({
         </CardContent>
       </CardActionArea>
       
-      <CardActions>
+      <CardActions className={classes.cardActions}>
         <Button size="small" color="primary">Learn More</Button>
         <Typography variant="h5" color="textSecondary">{index + 1}</Typography>
       </CardActions>
