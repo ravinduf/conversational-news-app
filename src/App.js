@@ -9,14 +9,18 @@ const alanKey = process.env.REACT_APP_ALAN_AI_SDK
 function App() {
   const classes = useStyles()
   const [newsArticles, setNewsArticles] = useState([]);
-
+  const [activeArticle, setActiveArticle] = useState(0);
 
   useEffect(() => {
     alanBtn({
       key: alanKey,
       onCommand: ({ command, articles }) => {
         if(command === 'newHeadlines') {
-          setNewsArticles(articles)
+          setNewsArticles(articles);
+          setActiveArticle(0);
+        }
+        else if (command === 'highlight'){
+          setActiveArticle((prev) => prev + 1);
         }
       }
     })
@@ -26,7 +30,7 @@ function App() {
       <div className={classes.logoContainer}>
         <img alt="alanLogo" src="https://voicebot.ai/wp-content/uploads/2019/10/alan.jpg" className={classes.alanLogo}/>
       </div>
-      <NewsCards articles={newsArticles}/>
+      <NewsCards articles={newsArticles} activeArticle={activeArticle}/>
      
     </div>
   );

@@ -1,4 +1,5 @@
-import React from 'react'
+import {useRef, useEffect, useState} from 'react'
+import classNames from 'classnames';
 
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -19,11 +20,22 @@ const NewsCard = ({
               url, 
               urlToImage 
               }, 
-            index }) => {
+            index,
+            active }) => {
 
     const classes = useStyles();
+    console.log(active)
+    
+    const ref = useRef();
+
+    useEffect(()=> {
+      if (active-1 === index)
+        ref.current.scrollIntoView({block: "center"});
+        // window.scroll(0, ref.current.offsetTop - 50);
+    },[index, active])
+
   return (
-    <Card className={classes.card}>
+    <Card className={classNames(classes.card, active-1 === index ? classes.activeCard : null)} ref={ref}>
       {/* the clickable area */}
       <CardActionArea href={url} target="_blank"> 
         <CardMedia className={classes.media}  image={urlToImage || `https://s.france24.com/media/display/d1676b6c-0770-11e9-8595-005056a964fe/w:1400/p:16x9/news_1920x1080.webp`} /> {/* the tag to add image to card */}
